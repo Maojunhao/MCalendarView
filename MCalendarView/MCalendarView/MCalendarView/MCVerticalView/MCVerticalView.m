@@ -107,7 +107,7 @@ static NSString * const MC_ID_HEADER = @"MC_VERTICAL_HEADER_MONTH";
     {
         self.startIndexPath = startIndexPath;
         self.endIndexPath = endIndexPath;
-//        self.containedIndexPaths = [self indexPathsBetweenStartIndexPath:self.startIndexPath endIndexPath:self.endIndexPath];
+        self.containedIndexPaths = [self indexPathsBetweenStartIndexPath:self.startIndexPath endIndexPath:self.endIndexPath];
     }
 }
 

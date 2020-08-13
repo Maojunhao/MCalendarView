@@ -21,7 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    MCalendarView * calendarView = [[MCalendarView alloc] initWithFrame:self.view.bounds];
+    MCalendarView * calendarView = [[MCalendarView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44)];
     [self.view addSubview:calendarView];
     
     [self setupHorizontalView:calendarView];

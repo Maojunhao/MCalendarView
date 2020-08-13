@@ -124,6 +124,17 @@ static NSString * const MC_ID_HORIZONTAL_HEADER = @"MC_HORIZONTAL_CELL_HEADER";
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        // 先检查自定义
+        if (self.model.monthReusableID) {
+            MCMonthHeaderView * customHeaderView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:self.model.monthReusableID forIndexPath:indexPath];
+            if ([customHeaderView isKindOfClass:[MCMonthHeaderView class]]) {
+                customHeaderView.model = self.model;
+                customHeaderView.month = self.month;
+                [customHeaderView reloadData];
+                return customHeaderView;
+            }
+        }
+        
         MCMonthHeaderView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:MC_ID_HORIZONTAL_HEADER forIndexPath:indexPath];
         headerView.model = self.model;
         headerView.month = self.month;
@@ -135,8 +146,19 @@ static NSString * const MC_ID_HORIZONTAL_HEADER = @"MC_HORIZONTAL_CELL_HEADER";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCDayCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:MC_ID_HORIZONTAL_CELL forIndexPath:indexPath];
     MCDayModel * day = [self.month.days objectAtIndex:indexPath.row];
+    // 先检查自定义
+    if (self.model.dayReusableID) {
+        MCDayCell * customCell = [collectionView dequeueReusableCellWithReuseIdentifier:self.model.dayReusableID forIndexPath:indexPath];
+        if (customCell && [customCell isKindOfClass:[MCDayCell class]]) {
+            customCell.day = day;
+            customCell.model = self.model;
+            [customCell reloadData];
+            return customCell;;
+        }
+    }
+    
+    MCDayCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:MC_ID_HORIZONTAL_CELL forIndexPath:indexPath];
     cell.model = self.model;
     cell.day = day;
     [self updateDayCell:cell atIndexPath:indexPath];
