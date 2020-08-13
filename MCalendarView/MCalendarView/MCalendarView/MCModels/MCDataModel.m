@@ -1,15 +1,17 @@
 //
-//  ViewController.h
+//  MCDayModel.m
 //  MCalendarView
 //
 //  Created by Maojunhao on 2020/4/21.
 //  Copyright © 2020 Maojunhao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MCDataModel.h"
 
-@interface ViewController : UIViewController
-
+@implementation MCDayModel
 
 @end
 
+@implementation MCMonthModel
+
+@end
